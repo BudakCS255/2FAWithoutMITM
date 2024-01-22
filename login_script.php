@@ -17,7 +17,7 @@ if ($conn->connect_error) {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
-    $password = $_POST['password']; // In a real-world scenario, use password hashing
+    $password = $_POST['password'];
 
     $stmt = $conn->prepare("SELECT id, password, role FROM users WHERE username = ?");
     $stmt->bind_param("s", $username);
