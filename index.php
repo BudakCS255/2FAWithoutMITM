@@ -1,6 +1,18 @@
 <?php
 session_start();
 
+if (isset($_POST['action']) && $_POST['action'] == 'logout') {
+    // Unset all of the session variables
+    $_SESSION = array();
+
+    // Destroy the session.
+    session_destroy();
+
+    // Redirect to login page
+    header("Location: login.php");
+    exit;
+}
+
 // Redirect to login page if not logged in
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header("Location: login.php");
@@ -208,6 +220,13 @@ $conn->close();
             echo '<p>' . htmlspecialchars($_GET['message']) . '</p>';
         }
         ?>
+
+            <!-- Logout Form -->
+<form method="post">
+    <input type="hidden" name="action" value="logout">
+    <input type="submit" value="Logout">
+</form>
+        
     </div>
 </body>
 </html>
